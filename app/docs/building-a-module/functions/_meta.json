@@ -1,0 +1,5 @@
+{
+  "searchFilters": "searchFilters()",
+  "search": "search()",
+  "discoverListings": "discoverListings()"
+}

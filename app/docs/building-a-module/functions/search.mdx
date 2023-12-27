@@ -1,0 +1,107 @@
+## Arguments
+
+a SearchQuery object, which contains:
+
+- query: the raw query from the user
+- page: OPTIONAL, the page of the current request. More info later in the "Return value" part.
+- filters: list of filter ids with its enabled filterOptionIds
+
+## Return value
+
+This function returns a Paging with an array of Playlists inside
+
+### Paging
+
+A paging is like a page. Eg if you search something on a website, you'll often have page 1, page 2, etc. Pagings work similar to that.
+
+It has the following options:
+
+- id: an ID for how you identify the page (eg "1", "2", "36").
+- previousPage: an ID for what the next page is going to be. Must match id's format.
+- nextPage: same as previousPage, must match id format too. If this is not null, this is what'll get used as the SearchQuery.page argument in the next request once you scroll a bit.
+- title: the title you want to show when searching.
+- items: a list of playlists. Can be left undefined if you want the function to get called again with the current object's id as the SearchQuery.page argument (can be useful if you can't grab everything with a single request).
+
+### Playlist
+
+A playlist is just like a certain show's basic meta. It has some needed info (id) & some other meta info that's not critical (posterImage, bannerImage). In the next function, the "id" will be passed through.
+
+- id: the id of the playlist (eg link to it)
+- title, posterImage & bannerImage: OPTIONAL, self explanatory
+- url: the url of the show
+- status: a PlaylistStatus enum value (upcoming, ongoing, completed, unknown, ...)
+- type: a PlaylistType enum value (video, image, text)
+
+### SearchFilter properties
+
+- multiselect, required & displayName are pretty self-explanatory
+- id is the actual value that you're going to get when the tags get used in a search. Eg if for a tag adds "&genre=" in the url, you should probably use "genre" as the id.
+- options: a list of SearchFilterOption[] which contains a displayName & an id. The ID is the same principle as the one for SearchFilter, and the displayName is self explanatory again
+
+## Examples
+
+### Input:
+
+```ts
+console.log(query.query);
+// epic movie
+console.log(query.query);
+// hunter
+
+console.log(query.page);
+// *undefined*
+console.log(query.page);
+// 2
+
+console.log(query.filters);
+// []
+console.log(query.filters);
+// [{ id: genre, optionIds: ["anime", "comedy"] }]
+```
+
+### Output:
+
+```ts
+return {
+  id: '1',
+  previousPage: undefined,
+  nextPage: '2',
+  title: 'Page 1',
+  items: [
+    {
+      id: '/library/watch/hxh',
+      title: 'Hunter X hunter',
+      posterImage: 'https://www.nyan.cat/cats/original.gif',
+      url: '/library/watch/hxh',
+      status: PlaylistStatus.completed,
+      type: PlaylistType.video,
+    },
+    {
+      id: '/library/watch/op',
+      title: 'One Piece',
+      posterImage: 'https://www.nyan.cat/cats/original.gif',
+      url: '/library/watch/op',
+      status: PlaylistStatus.ongoing,
+      type: PlaylistType.video,
+    },
+  ],
+};
+```
+
+```ts
+return {
+  id: '3',
+  previousPage: '2',
+  nextPage: undefined, // = last page
+  items: [
+    {
+      id: '/library/watch/nekopara',
+      title: 'Nekopara',
+      posterImage: 'https://www.nyan.cat/cats/original.gif',
+      url: '/library/watch/nekopara',
+      status: PlaylistStatus.unknown,
+      type: PlaylistType.video,
+    },
+  ],
+};
+```

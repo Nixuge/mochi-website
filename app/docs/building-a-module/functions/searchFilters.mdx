@@ -1,0 +1,41 @@
+## Arguments
+
+None :D
+
+## Return value
+
+This function returns an array of SearchFilter.
+Every SearchFilter is (as its name implies) a search filter.
+
+### SearchFilter properties
+
+- multiselect, required & displayName are pretty self-explanatory
+- id is the actual value that you're going to get when the tags get used in a search. Eg if for a tag adds "&genre=" in the url, you should probably use "genre" as the id.
+- options: a list of SearchFilterOption[] which contains a displayName & an id. The ID is the same principle as the one for SearchFilter, and the displayName is self explanatory again
+
+## Examples
+
+```ts
+return [
+  {
+    id: 'genre',
+    displayName: 'Genre',
+    multiselect: true,
+    required: false,
+    options: [
+      { id: 'anime', displayName: 'Anime' },
+      { id: 'action', displayName: 'Action' },
+    ],
+  },
+  {
+    id: 'country',
+    displayName: 'Country',
+    multiselect: true,
+    required: false,
+    options: [
+      { id: '17', displayName: 'Canada' }, // id = country code for the search query
+      { id: '33', displayName: 'France' },
+    ],
+  },
+];
+```
