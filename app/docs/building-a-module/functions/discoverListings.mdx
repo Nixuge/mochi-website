@@ -1,0 +1,76 @@
+## Arguments
+
+Optional: a DiscoverListingsRequest object, which contains a listingId and a Page.
+
+This object is used if you want to have a "view more" button on top of a block of anime.
+
+listingId will be the id of the listing, while page will be the id of the paging object.
+
+## Return value
+
+This function returns an array of DiscoverListings.
+
+A discoverListing object is an object that represents a block of shows on the homepage of your module.
+
+It's usually used for latest releases or features/popular shows. Basically everything that's on a source's homepage.
+
+It has the following properties:
+
+- id: an ID for the discoverListing.
+- title: self explanatory.
+- type: a DiscoverListingType enum value (default, rank, featured)
+  > Featured makes a big slider, default makes a small slider, rank makes a ranking section
+- orientation: a DiscoverListingOrientationType enum value (portrait or landscape, the orientation of the posterImage)
+- paging: a `Paging<Playlist>` object
+
+### Paging
+
+The paging structure is EXACTLY the same as what you'd find in search(). Please refer to that page if you need some info about it.
+
+Note that the paging's page can be used in the DiscoverListingsRequest argument (see #arguments at the top)
+
+## Examples
+
+### Input:
+
+```ts
+console.log(listingRequest);
+// *undefined*
+
+console.log(listingRequest.listingId);
+// latest-releases
+console.log(listingRequest.listingId);
+// featured
+
+console.log(listingRequest.page);
+// 1
+console.log(listingRequest.page);
+// 5
+```
+
+### Output:
+
+```ts
+return [
+  {
+    id: 'featured',
+    title: 'Featured',
+    type: DiscoverListingType.featured,
+    orientation: DiscoverListingOrientationType.landscape,
+    paging: `SEE #search`,
+  },
+  {
+    id: 'latest',
+    title: 'Latest Releases',
+    type: DiscoverListingType.default,
+    orientation: DiscoverListingOrientationType.landscape,
+    paging: `SEE #search`,
+  },
+];
+```
+
+```ts
+// Note: while this'll obviously show nothing, your module will still be usable.
+// It's common to release a beta module that just returns [] without any logic if you already have the rest implemented.
+return [];
+```
