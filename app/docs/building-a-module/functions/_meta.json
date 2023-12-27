@@ -1,5 +1,6 @@
 {
   "searchFilters": "searchFilters()",
   "search": "search()",
-  "discoverListings": "discoverListings()"
+  "discoverListings": "discoverListings()",
+  "playlistDetails": "playlistDetails()"
 }

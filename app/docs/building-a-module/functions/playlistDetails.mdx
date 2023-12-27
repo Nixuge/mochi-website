@@ -1,0 +1,57 @@
+## Arguments
+
+a playlistId that represents the id of the anime you want to get the status of. It's either from search() return's ` paging.items` or discoverListing() return's `discoverlisting.paging.items`
+
+## Return value
+
+This function returns a PlaylistDetails object, which is pretty self-explanatory and has self-explanatory properties too:
+
+- synopsis
+- altTitles
+- altPosters
+- altBanners
+- genres
+- yearReleased (optional)
+- ratings (optional)
+- previews: array of PlaylistPreviews (tbh usually left as [])
+
+#### PlaylistPreviews:
+
+- title (optional)
+- description (optional)
+- thumbnail (optional)
+- link
+- type: PlaylistPreviewType enum value (video, image)
+
+## Examples
+
+### Input:
+
+```ts
+console.log(playlistId);
+// /library/watch/hxh
+```
+
+### Output:
+
+```ts
+return {
+  synopsis: 'A boy tries to find his dad who left him as a child.',
+  altTitles: ['hxh', 'hxh 2011'],
+  altPosters: ['https://www.nyan.cat/cats/original.gif'],
+  altBanners: [],
+  genres: ['anime', 'action', 'adventure'],
+  previews: ['https://www.nyan.cat/cats/original.gif'],
+};
+```
+
+```ts
+// You can very well just give 0 info like this.
+return {
+  altTitles: [],
+  altPosters: [],
+  altBanners: [],
+  genres: [],
+  previews: [],
+};
+```
