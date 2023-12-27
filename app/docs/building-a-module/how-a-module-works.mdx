@@ -1,0 +1,24 @@
+## What does a module do exactly?
+
+A module is simply a class containing multiple function (4 by default), each doing something specific needed to get & order your module's content properly.
+
+## What are those functions?
+
+Note that this is a brief explanation of what each function does. For a more in-depth explanation of every function, open up the "Functions" subdirectory and you'll find what you need .
+
+### Default functions
+
+Here are the functions you need on every module, no matter what type.
+
+- `searchFilters`: returns an array containing all search filters available.
+- `search`: returns a page with an array of playlist (=show) items.
+- `discoverListings`: returns an array of DiscoverListing, basically what you see in the homepage of a module.
+- `playlistDetails`: gets more info about a certain show.
+
+### VideoContent functions
+
+Functions needed on video modules
+
+- `playlistEpisodes`: returns a list of episodes.
+- `playlistEpisodeSources`: returns the list of sources for a certain episode.
+- `playlistEpisodeServer`: gets the actual playback file(s) url(s) (eg .mp4, m3u8) from the source.

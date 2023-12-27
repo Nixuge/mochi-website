@@ -1,0 +1,51 @@
+## Quick note
+
+This guide assumes you already have basic knowledge of Javascript/Typescript and npm.
+
+You also need to have git installed.
+
+# Getting started
+
+### Repo creation
+
+Start off by installing the mochi-cli package:
+
+```sh
+# Using npm:
+npm install -g @mochiapp/cli
+# Using pnpm:
+pnpm add -g @mochiapp/cli
+```
+
+Then use the following to create a new repo:
+`npx mochi-cli init repo --name <RepoName> --author <Author>`
+
+cd into your newly made repo & run
+
+```sh
+# Using npm:
+npm i
+# Using pnpm:
+pnpm i
+```
+
+### Module creation
+
+Make a new module:
+`npx mochi-cli init module --name <ModuleName>`
+
+You should have a module whose index is located at (`./src/<ModuleName>/index.ts`)
+
+### Module type
+
+Inside of the index file from the last step you should have a class of the name you specified. You now need to specify what type of media this module will be for. As said previously, there are 3:
+
+- `VideoContent` (As of now the only one implemented)
+- `ImageContent` (WIP)
+- `TextContent` (WIP)
+
+Simply make the class exported class inside of your module's index implement one/multiple of those classes.
+
+(eg: `export default class <ModuleName> extends SourceModule implements VideoContent`)
+
+After that, just implement the functions of the interface(s) you implemented (just make them placeholder ones for now), and you should be all good for the next step !
